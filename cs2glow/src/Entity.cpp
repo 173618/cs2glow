@@ -19,4 +19,9 @@ std::vector<std::uintptr_t> Entity::get_controllers() const
 	}
 	return controller_list;
 }
+
+std::vector<std::uintptr_t> Entity::get_pawns() const
+{
+	std::vector<std::uintptr_t> pawn_list;
+}
   

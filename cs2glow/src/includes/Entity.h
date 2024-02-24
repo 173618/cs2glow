@@ -11,6 +11,7 @@ public:
 
 	std::uintptr_t get_entity_list_base() const;
 	std::vector<std::uintptr_t> get_controllers() const;
+	std::vector<std::uintptr_t> get_pawns() const;
 
 private:
 	Memory mem;
