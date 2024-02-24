@@ -3,6 +3,9 @@
 class Memory
 {
 public:
+	Memory()
+	{
+	}
 	DWORD get_proc_id();
 	std::uintptr_t get_module_base();
 	HANDLE get_handle();
@@ -12,6 +15,8 @@ public:
 	
 	template <typename T>
 	inline bool write(std::uintptr_t addr, T value) const;
+
+	void close_handle();
 
 private:
 	std::uintptr_t m_client;

@@ -7,14 +7,17 @@ int main()
 	//memory stuff
 	Memory mem;
 	mem.get_handle();
-	auto client = mem.get_module_base();
+	const auto client = mem.get_module_base();
+
+	Entity ent(mem, client);
+	Glow glow(mem, ent);
 
 	//hack loop
 	while (running == true)
 	{
-		std::uintptr_t entity = mem.read<std::uintptr_t>(client + offsets::dwEntityList);
-		//std::cout << std::hex << "0x" << entity << std::endl;
+		glow.glow_loop();
 		if (GetAsyncKeyState(VK_F9) &1)
 			running = false;
 	}
+	mem.close_handle();
 }

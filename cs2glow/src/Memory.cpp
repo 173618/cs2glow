@@ -75,3 +75,9 @@ HANDLE Memory::get_handle()
 		Sleep(3000);
 	} while (this->m_handle == NULL);
 }
+
+void Memory::close_handle()
+{
+	if (this->m_handle != NULL)
+		CloseHandle(this->m_handle);
+}
