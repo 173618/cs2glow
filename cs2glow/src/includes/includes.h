@@ -9,5 +9,5 @@
 //Our includes
 #include "offsets.h"
 #include "Memory.h"
-#include "Glow.h"
+#include "Hacks.h"
 #include "Entity.h"

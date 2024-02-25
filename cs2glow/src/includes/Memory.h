@@ -3,9 +3,6 @@
 class Memory
 {
 public:
-	Memory()
-	{
-	}
 	DWORD get_proc_id();
 	std::uintptr_t get_module_base();
 	HANDLE get_handle();
@@ -35,6 +32,6 @@ inline T Memory::read(std::uintptr_t addr) const
 template <typename T>
 inline bool Memory::write(std::uintptr_t addr, T value) const
 {
-	if (WriteProcessMemory(this->m_handle, reinterpret_cast<LPCVOID>(addr), value, sizeof(value), nullptr))
+	if (WriteProcessMemory(this->m_handle, reinterpret_cast<LPVOID>(addr), &value, sizeof(value), nullptr))
 		return false;
 }

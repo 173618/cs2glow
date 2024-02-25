@@ -129,13 +129,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Entity.cpp" />
-    <ClCompile Include="src\Glow.cpp" />
+    <ClCompile Include="src\Hacks.cpp" />
     <ClCompile Include="src\Memory.cpp" />
     <ClCompile Include="src\cs2glow.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\includes\Entity.h" />
-    <ClInclude Include="src\includes\Glow.h" />
+    <ClInclude Include="src\includes\Hacks.h" />
     <ClInclude Include="src\includes\Memory.h" />
     <ClInclude Include="src\includes\includes.h" />
     <ClInclude Include="src\includes\offsets.h" />
