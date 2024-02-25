@@ -5,6 +5,11 @@ std::uintptr_t Entity::get_entity_list_base() const
 	return this->mem.read<std::uintptr_t>(this->m_client + offsets::dwEntityList);
 }
 
+std::uintptr_t Entity::local_pawn() const
+{
+	return this->mem.read<std::uintptr_t>(this->m_client + offsets::dwLocalPlayerPawn);
+}
+
 std::vector<std::uintptr_t> Entity::get_controllers() const
 {
 	std::vector<std::uintptr_t> controller_list;

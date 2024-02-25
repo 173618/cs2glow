@@ -10,6 +10,7 @@ public:
 	~Entity() = default;
 
 	std::uintptr_t get_entity_list_base() const;
+	std::uintptr_t local_pawn() const;
 	std::vector<std::uintptr_t> get_controllers() const;
 	std::vector<std::uintptr_t> get_pawns() const;
 
