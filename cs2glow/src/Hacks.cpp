@@ -7,6 +7,8 @@ void Hacks::hack_loop()
 	{
 		for (const auto pawn : pawn_list)
 		{
+			if (mem.read<float>(pawn + offsets::m_flDetectedByEnemySensorTime) != 0)
+				continue;
 			mem.write<float>((pawn + offsets::m_flDetectedByEnemySensorTime), 86400.f);
 		}
 	}
@@ -14,6 +16,8 @@ void Hacks::hack_loop()
 	{
 		for (const auto pawn : pawn_list)
 		{
+			if (mem.read<float>(pawn + offsets::m_flDetectedByEnemySensorTime) == 0)
+				continue;
 			mem.write<float>((pawn + offsets::m_flDetectedByEnemySensorTime), 0.f);
 		}
 	}
