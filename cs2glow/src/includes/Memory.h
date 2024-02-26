@@ -32,6 +32,7 @@ inline T Memory::read(std::uintptr_t addr) const
 template <typename T>
 inline bool Memory::write(std::uintptr_t addr, T value) const
 {
-	if (WriteProcessMemory(this->m_handle, reinterpret_cast<LPVOID>(addr), &value, sizeof(value), nullptr))
+	if (WriteProcessMemory(this->m_handle, reinterpret_cast<LPVOID>(addr), &value, sizeof(value), nullptr) == NULL)
 		return false;
+	return true;
 }
