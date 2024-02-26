@@ -11,8 +11,7 @@ int main()
 
 	Entity ent(mem, client);
 	Hacks hack(mem, ent);
-	std::cout << "\n\n--------------------------------------------------\n";
-	std::cout << "Welcome" << std::endl;
+	std::cout << "\n\n---------------Welcome---------------\n";
 	std::cout << "Glow - F1" << std::endl;
 	std::cout << "Trigger - F2 (key = Mouse5)" << std::endl;
 	//hack loop
@@ -33,6 +32,7 @@ int main()
 			std::cout << "Trigger: " << std::boolalpha << active::trigger << std::endl;
 		}
 		hack.hack_loop();
+		Sleep(5);
 	}
 	mem.close_handle();
 }

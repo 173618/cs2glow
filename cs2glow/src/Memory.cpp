@@ -6,21 +6,22 @@ DWORD Memory::get_proc_id()
 
 	proc_entry32.dwSize = sizeof(PROCESSENTRY32W);
 
-	//Snapshot aller laufenden Prozesse
+	//Snapshot of all running processes
 	const auto h_snap = CreateToolhelp32Snapshot(TH32CS_SNAPALL, 0);
 
-	//Hat der snapshot geklappt?
+	//Snapshot valid?
 	if (h_snap == INVALID_HANDLE_VALUE)
 	{
 		std::cout << "[-] Snapshot failed with error code: 0x" << std::hex << GetLastError() << std::endl;
 		return 0;
 	}
 
-	//Durch den Snapshot iterieren und nach cs2 suchen
+	//Iterate through all snapshot entrys to find the correct one
 	while (Process32NextW(h_snap, &proc_entry32))
 	{	
 		if (!_wcsicmp(proc_entry32.szExeFile, L"cs2.exe"))
 		{
+			//Get the proc ID of the cs2 Process
 			this->m_proc_id = proc_entry32.th32ProcessID;
 			CloseHandle(h_snap);
 			return this->m_proc_id;
@@ -38,11 +39,11 @@ std::uintptr_t Memory::get_module_base()
 
 	while (module_base == 0)
 	{
-		//Snapshot aller Module die der Prozess geladen hat
+		//Snapshot through all modules
 		const HANDLE h_snap = CreateToolhelp32Snapshot(TH32CS_SNAPMODULE | TH32CS_SNAPMODULE32, this->m_proc_id);
 		while (Module32NextW(h_snap, &mod_entry))
 		{
-			//Suche nach client.dll
+			//Search for client.dll
 			if (!_wcsicmp(mod_entry.szModule, L"client.dll"))
 			{
 				module_base = reinterpret_cast<std::uintptr_t>(mod_entry.modBaseAddr);
@@ -60,15 +61,15 @@ HANDLE Memory::get_handle()
 {
 	do
 	{
-		//Proc ID holen
+		//get Proc ID
 		this->get_proc_id();
 		if(this->m_proc_id == 0)
 			continue;
-		//Handle öffnen
+		//Open HANDLE
 		this->m_handle = OpenProcess(PROCESS_ALL_ACCESS, FALSE, this->m_proc_id);
 		if (this->m_handle != NULL)
 		{
-			//Return wenns geklappt hat
+			//Return if it worked
 			std::cout << "[+] Got HANDLE!" << std::endl;
 			return this->m_handle;
 		}
