@@ -10,6 +10,32 @@ std::uintptr_t Entity::local_pawn() const
 	return this->mem.read<std::uintptr_t>(this->m_client + offsets::dwLocalPlayerPawn);
 }
 
+std::uintptr_t Entity::local_player() const
+{
+	return this->mem.read<std::uintptr_t>(this->m_client + offsets::dwLocalPlayerController);
+}
+
+bool Entity::teamcheck(const std::uintptr_t &player) const
+{
+	const auto local_team = this->mem.read<std::uint32_t>(this->local_player() + offsets::s_teamnum_offset);
+	const auto player_team = this->mem.read<std::uint32_t>(player + offsets::s_teamnum_offset);
+	if (local_team == player_team)
+		return true;
+	return false;
+}
+
+std::uintptr_t Entity::crsh_idx_to_controller(const std::int32_t& idx) const
+{
+	const auto ent_list = this->get_entity_list_base();
+	const auto entry = mem.read<std::uintptr_t>(ent_list + 0x8 * (idx >> 9) + 16);
+	return mem.read<std::uintptr_t>(entry + 120 * (idx & 0x1FF));
+}
+
+std::uint32_t Entity::player_hp(const std::uintptr_t& player) const
+{
+	return mem.read<std::uint32_t>(player + offsets::s_dwPawnHealth_offset);
+}
+
 std::vector<std::uintptr_t> Entity::get_controllers() const
 {
 	std::vector<std::uintptr_t> controller_list;
