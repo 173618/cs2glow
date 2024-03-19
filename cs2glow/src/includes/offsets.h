@@ -3,9 +3,9 @@
 namespace offsets 
 {
 	//Main addresses
-	constexpr DWORD64 dwEntityList = 0x18BBAF8;
-	constexpr DWORD64 dwLocalPlayerController = 0x190B308;
-	constexpr DWORD64 dwLocalPlayerPawn = 0x1730118;
+	constexpr DWORD64 dwEntityList = 0x18C2D58;
+	constexpr DWORD64 dwLocalPlayerController = 0x1912578;
+	constexpr DWORD64 dwLocalPlayerPawn = 0x17371A8;
 	
 	//Other offsets
 	constexpr DWORD64 m_iIDEntIndex = 0x15A4;
